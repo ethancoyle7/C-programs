@@ -1,0 +1,316 @@
+//****************************************************************************\\
+//                    Assignment #1
+//                    Name: Ethan Coyle
+//                    Data Structures Date: Date of Submission (09/21/20)   
+//*****************************************************************************
+//  the purpose of this program is to have 3 sets of three numbers inputted    
+//  by the user which will inadvertantly be assigned as a,b,c. within this    
+//  program, a series of void functions will work through assgining those    
+//  numbers to the FirstNumertator,DenomValue, determinant and finally
+//	the results will be displayed in a table. finally, the matrix will
+//	print out all three sets of three doubles in my matrix. this will all be 
+//	used to calculate the quadratic formula in a c++ program
+//*****************************************************************************
+
+//*****************************************************************************
+//  int main: will take the parameters within my matrix and display them 
+//			to user
+//   void ValueofDiscriminant(int array[rows][cols]);
+//			takes the parameters of the three by three matix  and assigns
+//			the user inputted three values and finds the value of the
+//			quadratic formulas descriminate then passes that value to 
+//			FirstNumertator funtion 
+//   void valueOfNumerator(int array[rows][cols], double)
+//			takes the previous perameters of three by three matrix
+//			and the double decriminite value and will calculate the value
+//			of the numeratore and pass four parameters onto the void
+//			DenomValue F(x)
+//   void valueofDenominator(int array[rows][cols], double, double);
+//			this function accepts four parameters the rows and collumns
+//			the descriminate and the FirstNumertator value. then this
+//          function will
+//			run through an equation to find the value of the FirstNumertator
+//			and pass five parameters onto the find FirstRoot function to 
+//			calculate roots
+//	void printRoots(int array[rows][cols], double, double, double);
+//			this function accepts the parameters of rows and collums,
+//			descriminate
+//			FirstNumertator and DenomValue. in this function, the 
+//			series of ifstatements will run to find real, complex or one 
+//			FirstRoot. then willpass six parameters to the showmethematrix
+//			function to print out
+//	void showMeTheMatrix(int array[rows][cols], double, double, double,
+//		double, double);
+//			this function accepts the parametere of the three by three
+//			matrix, descriminate,FirstNumertator, DenomValue and two roots
+//			the function will then  format the ourput to display to the user
+//			the results of the previously executed calculations in an 
+//			easy to read format and then display the matrix showing the 
+//			user inputted 9 values pertaining to a,b,c.
+//****************************************************************************
+
+
+
+#include<iostream>
+#include<cmath>
+#include<iomanip>
+using namespace std;
+
+const int rows = 3;//this is declared first to make the arrays set to 3X3
+const int cols = 3;
+
+void MyMatrix();
+void ValueofDiscriminant(int array[rows][cols]);
+void valueOfNumerator(int array[rows][cols], int[]);
+void valueofDenominator(int array[rows][cols], int[], double[], double[]);
+void printRoots(int array[rows][cols], int[], double[], double[], int[]);
+void showMeTheMatrix(int array[rows][cols], int[], double[],
+	double[], int[], double[], double[]);
+//**************************************************************************
+//function name-	int main
+//
+//parameters-		no parameter list but goes through program to
+//					calulate quadratic formula for user inputted values
+//					of three sets of numbers for ABC
+//
+//what it does?		the only thing that this function does is 
+//					print out the last function voidSHOWMATRIX
+//					to display to the user the calculated results
+//
+//program ends after that
+//**************************************************************************
+int main()
+{
+	MyMatrix();
+	system("pause");// pause the program to display the results
+}
+//****************************************************************************
+//function name-	void my matrix
+//
+//paramters-		accepts no inputted values
+//
+//what it does-		this function creates an array by asking the user
+//					to enter three sets of #'s for ABC
+//
+//returns-			this function passes the user inputted values
+//					onto the function finddiscriminate passing 
+//					array[row][cols] that hold the ABC values to
+//					be calculated for the various parts of quad formula
+//*****************************************************************************
+void MyMatrix()
+{
+	int ArrayMat_ABC[rows][cols];// create array of rows and collumns
+								 //preset to 3X3 for ABC ABC ABC
+	for (int i = 0; i < rows; i++)
+	{
+		cout << "enter 3 numbers for A,B,C and press enter"<<
+			"do this three times): \n";
+		cin >> ArrayMat_ABC[i][0] >> ArrayMat_ABC[i][1] >> ArrayMat_ABC[i][2];
+	}
+	cout << '\n';
+
+	ValueofDiscriminant(ArrayMat_ABC);// pass along to find discriminat
+}
+
+//****************************************************************************
+//function name-	void valuesofdiscriminant
+//
+//parameters-		accepts the int array of rows and collums
+//
+//what it does-		this function will process through the rows and calculate
+//					the equation b*b -4ac which is the descriminant value
+//					using an array to assign those value to them
+//
+//return type?		this function is void but passes the calculated 
+//					discriminate value on to the numerator function
+//					to calculate the numerator values
+//*****************************************************************************
+void ValueofDiscriminant(int array[rows][cols])
+{
+	int discriminant[rows];
+
+	for (int i = 0; i < rows; i++)// for loop to run through the values of abc
+	{	//array[i][1]=b times b minus(4 timesarray[i][0](a) times c(arry[i][2]
+		discriminant[i] = ((array[i][1]) * (array[i][1])) - (4 * array[i][0]
+			* array[i][2]);
+	}
+
+	valueOfNumerator(array, discriminant);
+	// passing to numerator function
+}
+
+//****************************************************************************
+//FUNCTION NAME- void valueOfNumerator
+//
+//PARAMTERS- accepts int row and collum and discriminate integer
+//
+//WHAT IT DOES- this function uses the passed values from discrimite function
+//				and will calulate the values from user inputted ABC
+//				to calculate to value of the first numerator and 2nd num
+//Return type?	this function has no return. this function passes
+//				the calculated results to the void denom function
+//				to calculate the value of the denominator
+//*****************************************************************************
+void valueOfNumerator(int array[rows][cols], int discriminant[])
+{
+	double FirstNumertator[rows];
+	double  SecondNumerator[rows];
+
+	for (int i = 0; i < 3; i++)
+	{
+		FirstNumertator[i] = (array[i][1]);
+		SecondNumerator[i] = sqrt(discriminant[i]);
+	}
+	valueofDenominator(array, discriminant, FirstNumertator, 
+		SecondNumerator);
+}	// pass the row,collum array, discriminatn numerators to denom function
+
+//****************************************************************************
+//FUNCTION NAME-void valueofDenominator
+//
+//PARAMTERS-	int array rows and collums, int discriminate, doublbe 1st and
+//				2nd numerator
+//
+//WHAT IT DOES- this function will take the parameters and calculate the 
+//				value of the denomiator using the user inputted numbers
+//
+//Return type?  this function doesnt return, instead passes the calculated 
+//				results over to the PrintRoots function to be used to
+//				calulate roots
+//*****************************************************************************
+void valueofDenominator(int array[rows][cols], int discriminant[],
+	double FirstNumertator[],double SecondNumerator[])
+{
+	int DenomValue[rows];
+
+	for (int i = 0; i < rows; i++)
+	{
+		DenomValue[i] = 2 * (array[i][0]);// denom value  of a times 2
+	}
+	// will pass this value onto the root function to figure out what roots
+	printRoots(array, discriminant, FirstNumertator, SecondNumerator,
+		DenomValue);
+}
+
+//****************************************************************************
+//function name-void printRoots
+//
+//parameters-	(int array[rows][cols], int discriminant[],
+//				double FirstNumertator[], double SecondNumerator[],
+//				int DenomValue[])
+//
+//this function accepts the passed values of numerators,denominators 
+//				as well as disciminite values and the user inputted 
+//				3x3 abc the program takes those values and calculates
+//				the roots of both positive and negative
+//
+//then this passed the calculated results to the showmematrix function
+//*****************************************************************************
+void printRoots(int array[rows][cols], int discriminant[],
+	double FirstNumertator[],double SecondNumerator[], int DenomValue[])
+{
+	double SecondRoot[rows];
+	double FirstRoot[rows];
+
+	for (int i = 0; i < 3; i++)
+	{
+		FirstRoot[i] = ((-array[i][1]) + sqrt(discriminant[i])) 
+			/ (2 * (array[i][0]));// positive root
+		SecondRoot[i] = ((-array[i][1]) - sqrt(discriminant[i])) / 
+			(2 * (array[i][0]));// negative root
+
+	}
+
+	showMeTheMatrix(array, discriminant, FirstNumertator, SecondNumerator, 
+		DenomValue, FirstRoot, SecondRoot);// pass the contents of each 
+										   //to next one
+}
+//****************************************************************************
+//function name-void showMeTheMatrix
+//
+//parameters:	int array[rows][cols], int discriminant[], 
+//				double FirstNumertator[], double SecondNumerator[],
+//				int DenomValue[],double FirstRoot[], double SecondRoot[])
+//
+// this function takes the values passed from the previous functions
+//				and formulates the output to display to the user 
+//				the calculates result of the broken down quadratic formula
+//
+//	at the very end, the display of the users inputted 3X3 is displayed
+//*****************************************************************************
+void showMeTheMatrix(int array[rows][cols], int discriminant[], 
+	double FirstNumertator[],double SecondNumerator[], int DenomValue[],
+	double FirstRoot[], double SecondRoot[])
+{
+	for (int i = 0; i < 3; i++)
+	{
+		cout << "\nEquation " << i + 1;
+		cout << "\nA is: " << array[i][0] << ", B is: "
+			<< array[i][1] << ", C is: " << array[i][2];
+
+		cout << "\nDiscriminant: " << discriminant[i] << '\n';
+
+		if (discriminant[i] > 0)
+		{
+			FirstNumertator[i] = (array[i][1]);
+			SecondNumerator[i] = sqrt(discriminant[i]);
+
+			cout << "FirstNumertator: " << "-" << FirstNumertator[i] <<
+				" +- " << SecondNumerator[i] << '\n';
+
+		}
+		else if (discriminant[i] == 0)
+		{
+			FirstNumertator[i] = (array[i][1]);
+
+			cout << "FirstNumertator: " << "-" << FirstNumertator[i] << '\n';
+		}
+		else
+		{
+			FirstNumertator[i] = (array[i][1]);
+			SecondNumerator[i] = sqrt(-1 * discriminant[i]);
+			cout << "FirstNumertator: " << "-" << FirstNumertator[i] <<
+				" +- " << SecondNumerator[i] << "i\n";
+		}
+
+		cout << "DenomValue: " << DenomValue[i] << '\n';
+
+		if (discriminant[i] > 0)
+		{
+			FirstRoot[i] = (array[i][1]) / (2 * (array[i][0])) +
+				(sqrt(discriminant[i]) / (2 * (array[i][0])));
+
+			SecondRoot[i] = (array[i][1]) / (2 * (array[i][0])) -
+				(sqrt(discriminant[i]) / (2 * (array[i][0])));
+			cout << "There are two real roots : " << SecondRoot[i] <<
+				" and " << FirstRoot[i]
+				<< '\n';
+		}
+		else if (discriminant[i] == 0)
+		{
+			FirstRoot[i] = (array[i][1]) / (2 * (array[i][0]));
+			cout << "There is one real root: -" << FirstRoot[i] << '\n';
+		}
+		else
+		{
+			FirstRoot[i] = (array[i][1]) / (2 * (array[i][0]));
+			SecondRoot[i] = sqrt(-1 * discriminant[i]) / (2 * (array[i][0]));
+
+			cout << "There are two complex roots : -" << FirstRoot[i] <<
+				" +- " << SecondRoot[i] << "i\n";;// put i on end for 
+												  // imaginary
+		}
+		cout << "\n=====================================\n\n";
+	}
+
+	cout << "\n THIS IS YOUR MATTRIX\n\n";
+
+	for (int i = 0; i < rows; i++)
+	{
+		for (int j = 0; j < cols; j++)
+		{
+			cout << left << setw(8) << array[i][j];
+		}
+		cout << endl;
+	}
+}
