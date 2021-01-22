@@ -1,8 +1,4 @@
-//****************************************************************************\\
-//                    Assignment #1
-//                    Name: Ethan Coyle
-//                    Data Structures Date: Date of Submission (09/21/20)   
-//*****************************************************************************
+
 //  the purpose of this program is to have 3 sets of three numbers inputted    
 //  by the user which will inadvertantly be assigned as a,b,c. within this    
 //  program, a series of void functions will work through assgining those    
