@@ -1,0 +1,147 @@
+
+// This program will be utilizing functions and functions calls to 
+// gather up patient info and  the cost that they have accrued with both 
+// in-patient and outpatient cost
+
+#include<fstream>
+#include<iostream>
+#include<iomanip>
+using namespace std;
+
+// write the function prototypes now
+double InPatientBill(int days, double charges, double others, double medicines);
+double OutPatientBill(double charges, double medicines);
+
+int main()
+{
+	ifstream Infile;
+	Infile.open("input.txt");
+	ofstream Outfile;
+	Outfile.open("output.txt");
+	
+	long IdNum; // Holds the patients ID number
+	char Letter; // is the inpatient and in our out patient
+	double InPatient, OutPatient, charges, medicine, others;
+	// this will hold out or in patient results
+	int days;
+
+	Outfile << "STUDENT NAME : ETHAN COYLE" << '\n';
+	Outfile << fixed << setprecision(2); // set all decimals to 2
+	while (Infile >> IdNum >>Letter)// read in the id and letter
+	{
+	
+
+		if (Letter== 'I' || Letter== 'i')
+		{
+			//Checks whether the id is in given range(from 1 through 5)
+			if (IdNum >= 10000 && IdNum <= 59999)
+			{
+
+				//Infile >> IdNum;
+				//if yes read the next four values
+				Infile >> days >> charges >> others >> medicine;
+				//Calls InPatientBill method which calculates the charges and 
+				//returns double value labeled InPatient
+				InPatient = InPatientBill(days, charges, others, medicine);
+				//Now format the output
+				Outfile << "************************************************"<<
+					"**********" << '\n';
+				Outfile << "Patient ID: " << setw(10) << IdNum << endl;
+				Outfile << "Type: In-Patient" << endl;
+				Outfile << "Total Due: " << setw(10) << " $ " << setw(8)<<
+					InPatient << "\n\n";
+				Outfile << setw(5) << days << " days @ \t   $ " << setw(8)
+					<< charges << '\n';
+				Outfile << '\t'<<  "Other \t\t   $ " <<setw(8)<< others << '\n';
+				Outfile << '\t'<<"Medicine \t   $ " << setw(8) << medicine
+					<< '\n';
+
+			}
+		}
+
+		else if (Letter== 'O' || Letter== 'o')
+		{
+			//Checks whether IDNum is in given range(from 6 through 9)
+			if (IdNum >= 60000 && IdNum <= 99999)
+			{
+			
+				Infile >> charges >> medicine;
+				//if yes read the next two values
+
+				//Calls OutPatientBill function which calculates the charges 
+				//and returns double value as OutPatient i.e. TotCharge
+				OutPatient = OutPatientBill(charges, medicine);
+				//format the output below
+				Outfile << "***************************************************" 
+					<<"****" << '\n';
+				Outfile << "Patient ID: " << setw(10) << IdNum << '\n';
+				Outfile << "Type: Out-Patient" << '\n';
+				Outfile << "Total Due: " << "        $ " << setw(8)<< 
+					OutPatient << "\n\n";
+				Outfile << "\tCharges \t   $  " << setw(6)<< charges
+					<< '\n';
+				Outfile << "\tMedicine \t   $ " << setw(8) << medicine
+					<< '\n';
+				Outfile << "\tProcessing \t   $    10.00" << '\n';
+			}
+		}
+
+		else
+		{
+			//if doesnt fit the listed if else, will say error 
+			//Infile >> IdNum >> Letter;
+			Outfile << "***********************************************"<<
+			"***********" << '\n';
+			Outfile << "Patient ID : " << setw(10) << IdNum << setw(10) <<
+				"Error" << '\n';
+			Outfile << "************************************************" <<
+				"***********" << '\n';
+		}
+	}
+
+	Infile.close();
+	Outfile.close();
+	return 0;
+}
+
+/******************************************************************************
+FUNCTION NAME= InPatientBill
+INPUT- Parameters are four parameters int days, double charges, double other 
+		charges and double medicine
+PROCESS- This function will read the days, charges, and other cost and the 
+	medicine cost.
+OUTPUT- This function will return the value of the totalcost per patient
+	with the return value of TotCharge
+ADDITIONAL INFO: This function's return vlue will then be called back in
+  main and the return ammount will be found there
+*******************************************************************************/
+
+double InPatientBill(int days, double charges, double others, double medicines)
+{
+	//Calculates the total fee
+	double TotCharge;
+	TotCharge = (days*charges) + others + medicines;
+	//returns result
+	return TotCharge;
+}
+
+/****************************************************************************** 
+FUNCTION NAME= OutPatientBill
+INPUT- Parameters are charges and double medicine charges
+PROCESS- This function will read the charges and the medicine cost and add
+		 10.00
+OUTPUT- This function will return the value of the totalcost per patient with 
+		the return value of TotCharge
+
+ ADDITIONAL INFO: This function's return vlue will then be called back in 
+				  main and the return ammount will be found there
+*******************************************************************************/
+
+double OutPatientBill(double charges, double medicines)
+{
+	//Calculates the total fee
+	double TotCharge;
+	TotCharge = charges + medicines + 10.00;
+	//returns result
+	return TotCharge;
+}
