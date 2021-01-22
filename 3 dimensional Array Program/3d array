@@ -1,0 +1,132 @@
+
+/** this program will be utilizing arrays and  declare 3 arrays, ArrayA, ArrayB,
+ArrayC, to hold 25 integers each.In main, compute the Sum and the Average of
+all values in ArrayA and the Sum and the Average of all values in ArrayB.
+ Print results with 2 decimal points & with appropriate headings. As well as in
+ as well as using two functions to compute arrayC, B and A and put the values into c
+  the comput function will add array a and b and put it in array c then the 
+  maxarray function finds the max value of the two and puts max value
+  int the respected array c slot
+**/
+
+
+
+
+#include<fstream>
+#include<iostream>
+#include<iomanip>
+using namespace std;
+
+
+void MaxArray(int ArrayA[], int ArrayB[], int ArrayC[]);// prototype
+void Compute(int ArrayA[], int ArrayB[], int ArrayC[]);// prototype
+
+int main()
+{
+	ifstream Infile;
+	Infile.open("input.txt");
+	ofstream Outfile;
+	Outfile.open("output.txt");
+	Outfile << fixed << setprecision(2);
+	// declaring array of size 25 for each array
+	int ArrayA[25], ArrayB[25], ArrayC[25];
+	// declaring variable for sum and average for both array A and B
+	double sumA = 0, sumB = 0, averageA, averageB;
+
+
+	// taking input in Array A using for loop first 25 values
+	Outfile << "The values in Array A are : " << '\n';
+	for (int i = 0; i < 25; i++)
+	{
+		Infile >> ArrayA[i];
+	}
+	// printing values of Array A below using for  last 25 values
+	Outfile << "\nArray A" << '\n';
+	for (int i = 0; i < 25; i++)
+		Outfile << setw(3) << i + 1 << "." << setw(6) << ArrayA[i] << '\n';
+
+
+	// taking input in Array B
+	Outfile << " The values in Array B are : " << '\n';
+	for (int i = 0; i < 25; i++)
+		Infile >> ArrayB[i];
+	// printing values of Array B
+	Outfile << "\nArray B" << '\n';
+	for (int i = 0; i < 25; i++)
+		Outfile << setw(3) << i + 1 << "." << setw(6) << ArrayB[i] << '\n';
+	// below need to calculate the sum of A and then B
+	for (int i = 0; i < 25; i++)
+	{
+		sumA += ArrayA[i];
+		sumB += ArrayB[i];
+	}
+	// finding average of both array
+	averageA = sumA / 25;
+	averageB = sumB / 25;
+	// printing sum and average of Array A and Array B
+	Outfile << "\nSum of all values in Array A: " << sumA << '\n';
+	Outfile << "Average of all values in Array A: " << averageA << '\n';
+	Outfile << "\nSum of all values in ArrayB: " << sumB << '\n';
+	Outfile << "Average of all values in ArrayB: " << averageB << '\n';
+	// filling Array C with sum of both Array A and Array B
+
+	Compute(ArrayA, ArrayB, ArrayC);// prints out added  a and b values
+
+	// printing Array C below with the max
+	Outfile << "\nArray C" << '\n';
+	for (int i = 0; i < 25; i++)
+	{
+		Outfile << setw(3) << i + 1 << "." << setw(6) << ArrayC[i] << '\n';
+	}
+
+	MaxArray(ArrayA, ArrayB, ArrayC);
+
+
+	Outfile << "\nArray C" << '\n';
+	for (int i = 0; i < 25; i++)
+		Outfile << setw(3) << i + 1 << "." << setw(6) << ArrayC[i] << '\n';
+
+
+	Infile.close();
+	Outfile.close();
+	return 0;
+}
+// filling Array C with sum of both Array A and Array B
+/*
+	Function Name void Compute
+	Input- this take three int parameter arrays
+	Process- this process then adds up the arrays of A and B then inputs this 
+			into array c
+	Output- this function will take the added values of array a and b 
+			and then put the value in respected array c slot
+			no return type just outputs the sum in array c
+*/
+void Compute(int arrayA[], int arrayB[], int arrayC[])
+{
+	for (int i = 0; i < 25; i++)
+	{
+		arrayC[i] = arrayA[i] + arrayB[i];
+	}
+	return;
+}
+
+
+/*
+	Function name: void MaxArray
+	Input- this array take three int array parameters
+	Process- and calculates the max and puts the value into array c
+	Output- this will then just print out the max value into array c
+	       no return type just prints out the max of each
+*/
+void MaxArray(int ArrayA[], int ArrayB[], int ArrayC[])
+{
+	for (int i = 0; i < 25; i++)
+	{
+		if (ArrayA[i] > ArrayB[i])
+			ArrayC[i] = ArrayA[i];
+		else
+			ArrayC[i] = ArrayB[i];
+	}
+
+	return;
+}
