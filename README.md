@@ -1,2 +1,2 @@
-# C-programs
-These are a list of formerly done programs that i have done
+## C-programs
+These are a list of some of the formerly done programs that i have done
