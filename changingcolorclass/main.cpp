@@ -1,3 +1,21 @@
+//2143 - OOPFinal Exam - Page 4 of 5February 23, 202110.  (50 points)  Writing aGrayscale ClassSo what is gray scale?  
+//Its where you take the 3 individual parts of a color and using those values youcalculate a single value 
+//that will be assigned to each of the 3 components, making it some shade of gray.For example here is red:  (0,255,0) and 
+//here is the gray scale equivalent:  (85,85,85) (using the averagemethod from below).
+//Your GrayScaler class is serious about its grayscalin‘ powers and has four methods to turn a color intoits monochromatic equivalent:
+//•Lightness
+//•Average
+//•Luminosity
+//•CustomLightness
+//•The lightness method averages the most prominent and least prominent colors:
+//•(max(R, G, B) +min(R, G, B))
+//2.Average•The average method simply averages the values:•(R+G+B)/3.Luminosity
+//•This  method  also  averages  the  values,  but  it  forms  a  weighted  average  to  account  for  humanperception. 
+//We’re more sensitive to green than other colors, so green is weighted most heavily:•(0.21∗R+ 0.72∗G+ 0.07∗B)Custom
+//•This method allows the user to pass in three floats to act as the weights in your formula:•w1∗R+w2∗G+w3∗B
+
+
+
 #include <iostream>
 
 using namespace std;
