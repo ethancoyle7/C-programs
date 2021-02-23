@@ -1,0 +1,30 @@
+rectangle 1 Dimensions are : 
+
+ Length =     5
+ width  =    10
+ Height =    15
+
+ rectangle 2 Dimensions are : 
+
+ Length =     5
+ width  =    10
+ Height =    15
+
+ rectangle 3 Dimensions are : 
+
+ Length =     5
+ width  =    10
+ Height =    15
+
+ using the multiplication overload 
+ rectangle 4 Dimensions are : 
+
+ Length =    25
+ width  =   100
+ Height =   225
+
+ rectangle 5 Dimensions are : 
+
+ Length =    30
+ width  =   110
+ Height =   240
