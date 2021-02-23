@@ -1,0 +1,3 @@
+value of x is 10
+value of x is 10.2
+value of x and y is 5, 10
