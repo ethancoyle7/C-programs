@@ -4,12 +4,14 @@
 //from fastest to slowest
 
 // 1.   0(1)- constant
-// 2.   O(logn)- logarithmic dividng,
-// 3.   O(n)- linear
+// 2.   O(logn)- logarithmic dividng, binary searching
+// 3.   O(n)- linear searching
 // 4.   0(nlogn) - linearithic
-// 5.   0(n^2)- polynomial
+// 5.   0(n^2)- polynomial -> (Insertion Sort, Selection Sort, and Bubble Sort.)
 // 6.   o(2^n)- exponential
 // 7.   O(n!)- factorial
+
+//matrix multiplication  o(n^3)
 
 
 
